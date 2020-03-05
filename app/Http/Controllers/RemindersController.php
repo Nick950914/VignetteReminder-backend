@@ -18,7 +18,7 @@ class RemindersController extends Controller
     public function index()
     {
         //
-        
+
     }
 
     /**
@@ -48,7 +48,7 @@ class RemindersController extends Controller
                 'changed_on' => 'required|date|before:tomorrow',
                 'due_change_date' => 'required|date|after:today',
             ]);
-            
+
             if ($v->fails())
             {
                 return response()->json([
@@ -58,13 +58,14 @@ class RemindersController extends Controller
             }
 
             $reminder = new Reminder();
+            $reminder->user_id = Auth::user()->id;
             $reminder->vehicle_id = $request->vehicle_id;
             $reminder->title = $request->title;
             $reminder->changed_on = $request->changed_on;
             $reminder->due_change_date = $request->due_change_date;
             $reminder->note = $request->note;
             $reminder->save();
-            
+
             return response()->json(['status' => 'success'], 200);
         } else {
             abort(401);
@@ -113,7 +114,7 @@ class RemindersController extends Controller
                 'changed_on' => 'required|date|before:tomorrow',
                 'due_change_date' => 'required|date|after:' . $new_date,
             ]);
-            
+
             if ($v->fails())
             {
                 return response()->json([
@@ -127,10 +128,10 @@ class RemindersController extends Controller
             $reminder->due_change_date = $request->due_change_date;
             $reminder->note = $request->note;
             $reminder->save();
-            
+
             return response()->json(['status' => 'success'], 200);
         } else {
-            abort(401);  
+            abort(401);
         }
     }
 
