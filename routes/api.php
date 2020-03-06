@@ -25,10 +25,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::post('register', 'AuthController@register');
         // Login User
         Route::post('login', 'AuthController@login');
-        
+
         // Refresh the JWT Token
         Route::get('refresh', 'AuthController@refresh');
-        
+
         // Below mention routes are available only for the authenticated users.
         Route::middleware('auth:api')->group(function () {
             // Get user info
