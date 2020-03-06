@@ -33,7 +33,7 @@ class AuthController extends Controller
         $user->save();
         $credentials = $request->only('first_name', 'last_name', 'email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
-            return response()->json(['status' => 'success', 'token' => $token, 'user_id' => $user->id, 'expires_in' => $this->guard()->factory()->getTTL() * 60], 200);
+            return response()->json(['status' => 'success', 'token' => $token, 'user_id' => $user->id, 'first_name' => $user->first_name, 'last_name' => $user->last_name, 'expires_in' => $this->guard()->factory()->getTTL() * 60], 200);
         }
     }
     /**
@@ -43,7 +43,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
-            return response()->json(['status' => 'success', 'token' => $token, 'user_id' => Auth::user()->id, 'expires_in' => $this->guard()->factory()->getTTL() * 60], 200);
+            return response()->json(['status' => 'success', 'token' => $token, 'user_id' => Auth::user()->id, 'first_name' => Auth::user()->first_name, 'last_name' => Auth::user()->last_name,  'expires_in' => $this->guard()->factory()->getTTL() * 60], 200);
         }
         return response()->json(['error' => 'login_error'], 401);
     }
