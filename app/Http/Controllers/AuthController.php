@@ -17,7 +17,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password'  => 'required|min:6|confirmed',
         ]);
-        
+
         if ($v->fails())
         {
             return response()->json([
@@ -33,7 +33,7 @@ class AuthController extends Controller
         $user->save();
         $credentials = $request->only('first_name', 'last_name', 'email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
-            return response()->json(['status' => 'success', 'token' => $token, 'expires_in' => $this->guard()->factory()->getTTL() * 60], 200);
+            return response()->json(['status' => 'success', 'token' => $token, 'userId' => $user->id, 'expires_in' => $this->guard()->factory()->getTTL() * 60], 200);
         }
     }
     /**
@@ -43,7 +43,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
-            return response()->json(['status' => 'success', 'token' => $token, 'expires_in' => $this->guard()->factory()->getTTL() * 60], 200);
+            return response()->json(['status' => 'success', 'token' => $token, 'userId' => Auth::user()->id, 'expires_in' => $this->guard()->factory()->getTTL() * 60], 200);
         }
         return response()->json(['error' => 'login_error'], 401);
     }
