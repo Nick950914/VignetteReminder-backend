@@ -17,6 +17,7 @@ class CreateVehiclesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('name');
+            $table->string('vehicle_reg_no');
             $table->string('vignette_reg_no')->nullable();
             $table->string('frame_no')->nullable();
             $table->string('sticker_no')->nullable();
