@@ -66,7 +66,7 @@ class RemindersController extends Controller
             $reminder->note = $request->note;
             $reminder->save();
 
-            return response()->json(['status' => 'success'], 200);
+            return response()->json(['status' => 'success', 'id' => $reminder->id], 200);
         } else {
             abort(401);
         }
