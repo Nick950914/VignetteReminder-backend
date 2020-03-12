@@ -8,7 +8,7 @@ class Vehicle extends Model
 {
     //
     protected $fillable = [
-        'name', 'vignette_reg_no', 'frame_no', 'sticker_no'
+        'name', 'vehicle_reg_no', 'frame_no', 'sticker_no'
     ];
 
     public function users() {
