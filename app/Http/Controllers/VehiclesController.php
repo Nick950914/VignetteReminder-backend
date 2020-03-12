@@ -47,7 +47,7 @@ class VehiclesController extends Controller
             $v = Validator::make($request->all(), [
                 'name' => 'required|min:3|regex:/(^[\pL0-9 ]+)$/u',
                 'vehicle_reg_no' => 'required|min:8|regex:/(^[\pL0-9 ]+)$/u',
-                'vignette_reg_no' => 'regex:/(^[\pL0-9 ]+)$/u',
+//                'vignette_reg_no' => 'regex:/(^[\pL0-9 ]+)$/u',
                 'frame_no' => 'regex:/(^[\pL0-9 ]+)$/u',
                 'sticker_no' => 'regex:/(^[\pL0-9 ]+)$/u',
             ]);
@@ -63,7 +63,7 @@ class VehiclesController extends Controller
             $vehicle->user_id = Auth::user()->id;
             $vehicle->name = $request->name;
             $vehicle->vehicle_reg_no = $request->vehicle_reg_no;
-            $vehicle->vignette_reg_no = $request->vignette_reg_no;
+//            $vehicle->vignette_reg_no = $request->vignette_reg_no;
             $vehicle->frame_no = $request->frame_no;
             $vehicle->sticker_no = $request->sticker_no;
             $vehicle->save();
@@ -131,7 +131,8 @@ class VehiclesController extends Controller
 
             $v = Validator::make($request->all(), [
                 'name' => 'required|min:3|regex:/(^[\pL0-9 ]+)$/u',
-                'vignette_reg_no' => 'regex:/(^[\pL0-9 ]+)$/u',
+                'vehicle_reg_no' => 'required|min:8|regex:/(^[\pL0-9 ]+)$/u',
+//                'vignette_reg_no' => 'regex:/(^[\pL0-9 ]+)$/u',
                 'frame_no' => 'regex:/(^[\pL0-9 ]+)$/u',
                 'sticker_no' => 'regex:/(^[\pL0-9 ]+)$/u',
             ]);
@@ -145,7 +146,8 @@ class VehiclesController extends Controller
             }
 
             $vehicle->name = $request->name;
-            $vehicle->vignette_reg_no = $request->vignette_reg_no;
+            $vehicle->vehicle_reg_no = $request->vehicle_reg_no;
+//            $vehicle->vignette_reg_no = $request->vignette_reg_no;
             $vehicle->frame_no = $request->frame_no;
             $vehicle->sticker_no = $request->sticker_no;
             $vehicle->save();
